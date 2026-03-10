@@ -78,9 +78,13 @@ a:hover { color: var(--accent-hover); }
   max-width: 1300px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 3fr 2fr;
   gap: var(--gap);
   align-items: stretch;
+  
+  height: 85vh; 
+  min-height: 650px;
+  max-height: 850px;
 }
 
 .panel {
@@ -627,6 +631,8 @@ p {
     grid-template-columns: 1fr;
     display: flex;
     flex-direction: column;
+    height: auto;
+    max-height: none;
   }
   .track-grid {
     grid-template-columns: 1fr;
