@@ -25,10 +25,12 @@
           <div class="profile-img">
             <img src="./files/profile.png" alt="Cyrus McCollim">
           </div>
+          <!--
           <div class="status-badge" id="commission-status">
             <div class="status-dot"></div>
             <span id="commission-text">Open to commissions</span>
           </div>
+          -->
         </div>
 
         <div class="bio-text">
@@ -336,11 +338,13 @@
 
       const commissionStatus = document.getElementById('commission-status');
     const commissionText = document.getElementById('commission-text');
-
+    
+    /*
     if (typeof IS_OPEN_TO_COMMISSIONS !== 'undefined' && !IS_OPEN_TO_COMMISSIONS) {
          commissionStatus.classList.add('status-closed');
          commissionText.textContent = "Unavailable for commission";
     }
+    */
 
     const emailBtn = document.getElementById('email-btn');
     const emailTooltip = document.getElementById('email-tooltip');
