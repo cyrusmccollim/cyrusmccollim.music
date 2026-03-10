@@ -10,19 +10,29 @@ try {
     }
 
     const catalog = {};
-    const categories = fs.readdirSync(audioDir).filter(f => fs.statSync(path.join(audioDir, f)).isDirectory());
+    const pages = fs.readdirSync(audioDir).filter(f => fs.statSync(path.join(audioDir, f)).isDirectory());
 
-    categories.forEach(category => {
-        const files = fs.readdirSync(path.join(audioDir, category))
-            .filter(f => {
-                const ext = path.extname(f).toLowerCase();
-                return ext === '.mp3' || ext === '.wav' || ext === '.ogg' || ext === '.flac';
-            })
-            .map(f => `${category}/${f}`);
+    pages.forEach(page => {
+        catalog[page] = {};
+        const categoriesDir = path.join(audioDir, page);
+        const categories = fs.readdirSync(categoriesDir).filter(f => fs.statSync(path.join(categoriesDir, f)).isDirectory());
 
-        if (files.length > 0) {
-            const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
-            catalog[formattedCategory] = files;
+        categories.forEach(category => {
+            const files = fs.readdirSync(path.join(categoriesDir, category))
+                .filter(f => {
+                    const ext = path.extname(f).toLowerCase();
+                    return ext === '.mp3' || ext === '.wav' || ext === '.ogg' || ext === '.flac';
+                })
+                .map(f => `${page}/${category}/${f}`);
+
+            if (files.length > 0) {
+                const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+                catalog[page][formattedCategory] = files;
+            }
+        });
+
+        if (Object.keys(catalog[page]).length === 0) {
+            delete catalog[page];
         }
     });
 
