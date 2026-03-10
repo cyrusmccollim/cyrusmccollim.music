@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyrus McCollim</title>
+  <meta name="description" content="Music portfolio of Cyrus McCollim.">
+  <meta name="theme-color" content="#070907">
+  <meta name="author" content="Cyrus McCollim">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200..800;1,9..40,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Nova+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="layout-container">
+    <div id="grid">
+
+      
+      <div class="panel section-bio">
+        <div class="intro-top">
+          <div class="profile-img">
+            <img src="./files/profile.png" alt="Cyrus McCollim">
+          </div>
+          <div class="status-badge">
+            <div class="status-dot"></div>
+            <span>Open to commissions</span>
+          </div>
+        </div>
+
+        <div class="bio-text">
+          <span class="label">Composer &middot; Pianist</span>
+          <h1>Cyrus McCollim</h1>
+          <p>
+            I enjoy writing orchestral arrangements, solo piano works, and other fun instrumental stuff. My music is largely inspired by video games and other visual media.
+          </p>
+        </div>
+      </div>
+
+      
+      <div class="panel section-music">
+        <div class="section-header-top">
+          <div>
+            <span class="label">Library</span>
+            <h2>Original Compositions</h2>
+          </div>
+          <div class="copyright">&copy; 2026 Cyrus McCollim</div>
+        </div>
+
+        <div class="audio-player-container">
+          <div id="track-list">
+             <div class="loading-state" style="color:var(--text-muted); font-size:0.9rem;">Loading catalog...</div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="panel section-contact">
+        <span class="label">Contact</span>
+        <h2 class="contact-header">Let's work together</h2>
+        <a href="mailto:contact@cyrusmccollim.music" class="contact-email">contact@cyrusmccollim.music</a>
+
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <span>Spotify</span>
+            <span>↗</span>
+          </a>
+          <a href="#" class="social-link">
+             <span>Instagram</span>
+             <span>↗</span>
+          </a>
+          <a href="#" class="social-link">
+             <span>Fiverr</span>
+             <span>↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div id="sticky-player" class="sticky-player">
+     <div class="sticky-info">
+        <span id="sticky-title">--</span>
+     </div>
+     <div class="sticky-controls">
+        <button id="sticky-play" class="play-btn"><div class="play-icon"></div></button>
+        <div class="progress-container" id="sticky-progress-container">
+           <div class="progress-track"><div class="progress-fill" id="sticky-fill"><div class="progress-handle"></div></div></div>
+        </div>
+        <div class="time-display" id="sticky-time">00:00 / 00:00</div>
+        
+        <div class="volume-control">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+          <input type="range" class="volume-slider" id="global-volume" min="0" max="1" step="0.01" value="0.8">
+        </div>
+        <button id="sticky-close" class="close-btn" aria-label="Close Player">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+     </div>
+  </div>
+
+  <script>
+    const audioData = {
+      "Acoustic": [
+        "acoustic/The Instigator v1.mp3",
+        "acoustic/The Instigator v2.mp3",
+        "acoustic/Western Stroll.mp3"
+      ],
+      "Orchestral": [
+        "orchestral/Breach Protocol.mp3",
+        "orchestral/Falling.mp3",
+        "orchestral/Shooter Countdown.wav",
+        "orchestral/Shooter Menu.wav"
+      ],
+      "Piano": [
+        "piano/Falling.wav",
+        "piano/Gentle Goodbye.wav",
+        "piano/Memory.wav"
+      ]
+    };
+
+    const audioPath = "./files/audio/";
+    const trackListContainer = document.getElementById('track-list');
+
+    const globalAudio = new Audio();
+    const trackMap = {};
+    let currentTrackFile = null;
+    let autoPlayInit = false;
+    let isUserSeeking = false;
+
+    const stickyPlayer = document.getElementById('sticky-player');
+    const stickyTitle = document.getElementById('sticky-title');
+    const stickyPlayBtn = document.getElementById('sticky-play');
+    const stickyProgressContainer = document.getElementById('sticky-progress-container');
+    const stickyProgressTrack = stickyProgressContainer.querySelector('.progress-track');
+    const stickyFill = document.getElementById('sticky-fill');
+    const stickyTime = document.getElementById('sticky-time');
+    const stickyCloseBtn = document.getElementById('sticky-close');
+
+    const volumeSlider = document.getElementById('global-volume');
+    globalAudio.volume = volumeSlider.value;
+    volumeSlider.addEventListener('input', (e) => {
+        globalAudio.volume = e.target.value;
+    });
+
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return "00:00";
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function formatTitle(filename) {
+      return filename.split('/').pop().replace(/\.(mp3|wav|ogg)$/i, '').replace(/[-_]/g, ' ');
+    }
+
+    function copyTrackLink(e, filename, copyBtn) {
+        e.stopPropagation();
+        const url = new URL(window.location.href);
+        url.searchParams.set('track', filename);
+        navigator.clipboard.writeText(url.href).then(() => {
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            setTimeout(() => { copyBtn.innerHTML = originalHTML; }, 2000);
+        });
+    }
+
+    function syncPlayStateUI(isPlaying) {
+        Object.values(trackMap).forEach(t => {
+            t.playBtn.innerHTML = '<div class="play-icon"></div>';
+            t.el.classList.remove('playing');
+        });
+
+        const activeContainer = trackMap[currentTrackFile];
+        if(!activeContainer) return;
+
+        if (isPlaying) {
+            activeContainer.playBtn.innerHTML = '<div class="pause-icon"></div>';
+            activeContainer.el.classList.add('playing');
+            stickyPlayBtn.innerHTML = '<div class="pause-icon"></div>';
+        } else {
+            activeContainer.playBtn.innerHTML = '<div class="play-icon"></div>';
+            activeContainer.el.classList.remove('playing');
+            stickyPlayBtn.innerHTML = '<div class="play-icon"></div>';
+        }
+    }
+
+    function preloadDurations(files) {
+         files.forEach(filename => {
+              const a = new Audio(audioPath + filename);
+              a.preload = "metadata";
+              a.addEventListener('loadedmetadata', () => {
+                  if(trackMap[filename]) {
+                      trackMap[filename].timeDisplay.textContent = `00:00 / ${formatTime(a.duration)}`;
+                  }
+              });
+         });
+    }
+
+    function playTrack(filename) {
+        if (currentTrackFile === filename) {
+            if (globalAudio.paused) globalAudio.play();
+            else globalAudio.pause();
+        } else {
+            if (currentTrackFile && trackMap[currentTrackFile]) {
+                trackMap[currentTrackFile].el.classList.remove('active-track');
+                trackMap[currentTrackFile].progressFill.style.width = '0%';
+            }
+
+            currentTrackFile = filename;
+            globalAudio.src = audioPath + filename;
+            globalAudio.play();
+
+            const activeTrack = trackMap[filename];
+            activeTrack.el.classList.add('active-track');
+
+            stickyPlayer.classList.add('visible');
+            stickyTitle.textContent = formatTitle(filename);
+
+            syncPlayStateUI(true);
+        }
+    }
+
+    function initPlayer() {
+      trackListContainer.innerHTML = '';
+      let allFiles = [];
+
+      for (const [category, files] of Object.entries(audioData)) {
+         allFiles = allFiles.concat(files);
+         const categoryHeader = document.createElement('h3');
+         categoryHeader.className = 'category-header';
+         categoryHeader.textContent = category;
+         trackListContainer.appendChild(categoryHeader);
+
+         const categoryGrid = document.createElement('div');
+         categoryGrid.className = 'track-grid';
+
+         for (const file of files) {
+           createTrackItem(file, categoryGrid);
+         }
+         trackListContainer.appendChild(categoryGrid);
+      }
+
+      preloadDurations(allFiles);
+
+      const params = new URLSearchParams(window.location.search);
+      const trackParam = params.get('track');
+      if (trackParam && trackMap[trackParam]) {
+          const targetEl = trackMap[trackParam].el;
+          setTimeout(() => {
+              targetEl.scrollIntoView({behavior: 'smooth', block: 'center'});
+              targetEl.style.boxShadow = "0 0 15px rgba(52, 211, 153, 0.4)";
+              setTimeout(()=> { targetEl.style.boxShadow = "none"; }, 2000);
+          }, 500);
+      }
+    }
+
+    function createTrackItem(filename, container) {
+      const el = document.createElement('div');
+      el.className = 'track-item';
+
+      const titleWrapper = document.createElement('div');
+      titleWrapper.className = 'title-wrapper';
+
+      const title = document.createElement('div');
+      title.className = 'track-title';
+      title.textContent = formatTitle(filename);
+
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-btn';
+      copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
+      copyBtn.addEventListener('click', (e) => copyTrackLink(e, filename, copyBtn));
+
+      titleWrapper.appendChild(title);
+      titleWrapper.appendChild(copyBtn);
+
+      const controls = document.createElement('div');
+      controls.className = 'track-controls';
+
+      const playBtn = document.createElement('button');
+      playBtn.className = 'play-btn';
+      playBtn.innerHTML = '<div class="play-icon"></div>';
+      playBtn.addEventListener('click', () => playTrack(filename));
+
+      const progressContainer = document.createElement('div');
+      progressContainer.className = 'progress-container';
+      const progressTrack = document.createElement('div');
+      progressTrack.className = 'progress-track';
+      const progressFill = document.createElement('div');
+      progressFill.className = 'progress-fill';
+      const progressHandle = document.createElement('div');
+      progressHandle.className = 'progress-handle';
+
+      progressFill.appendChild(progressHandle);
+      progressTrack.appendChild(progressFill);
+      progressContainer.appendChild(progressTrack);
+
+      const timeDisplay = document.createElement('div');
+      timeDisplay.className = 'time-display';
+      timeDisplay.textContent = "--:--";
+
+      const bindSeek = (elem, progressTrackElem) => {
+          let isDragging = false;
+          let dragPercentage = 0;
+
+          const updateVisualsOnly = (e) => {
+             const rect = progressTrackElem.getBoundingClientRect();
+             let percent = (e.clientX - rect.left) / rect.width;
+             percent = Math.max(0, Math.min(1, percent));
+             dragPercentage = percent;
+
+             // Only update the visuals, NOT the audio current time yet
+             if(trackMap[currentTrackFile]) {
+                 trackMap[currentTrackFile].progressFill.style.width = `${percent * 100}%`;
+                 stickyFill.style.width = `${percent * 100}%`;
+             }
+          };
+
+          elem.addEventListener('mousedown', (e) => {
+             if(!globalAudio.duration || currentTrackFile !== filename) {
+                 playTrack(filename);
+                 setTimeout(()=>{
+                     isDragging = true;
+                     isUserSeeking = true;
+                     updateVisualsOnly(e);
+                 }, 50);
+                 return;
+             }
+             isDragging = true;
+             isUserSeeking = true;
+             updateVisualsOnly(e);
+          });
+
+          window.addEventListener('mousemove', (e) => {
+             if (isDragging && currentTrackFile === filename && globalAudio.duration) {
+                 updateVisualsOnly(e);
+             }
+          });
+
+          window.addEventListener('mouseup', () => {
+             if (isDragging) {
+                 isDragging = false;
+                 isUserSeeking = false;
+                 if(globalAudio.duration) {
+                    globalAudio.currentTime = dragPercentage * globalAudio.duration;
+                 }
+             }
+          });
+      };
+      bindSeek(progressContainer, progressTrack);
+
+      controls.appendChild(playBtn);
+      controls.appendChild(progressContainer);
+      controls.appendChild(timeDisplay);
+
+      el.appendChild(titleWrapper);
+      el.appendChild(controls);
+      container.appendChild(el);
+
+      trackMap[filename] = {
+          el, playBtn, progressFill, timeDisplay
+      };
+    }
+
+    globalAudio.addEventListener('play', () => syncPlayStateUI(true));
+    globalAudio.addEventListener('pause', () => syncPlayStateUI(false));
+
+    globalAudio.addEventListener('timeupdate', () => {
+        if(!globalAudio.duration || !currentTrackFile || isUserSeeking) return;
+
+        const activeTrack = trackMap[currentTrackFile];
+        const percent = (globalAudio.currentTime / globalAudio.duration) * 100;
+        const timeStr = `${formatTime(globalAudio.currentTime)} / ${formatTime(globalAudio.duration)}`;
+
+        if(activeTrack) {
+            activeTrack.progressFill.style.width = `${percent}%`;
+            activeTrack.timeDisplay.textContent = timeStr;
+        }
+
+        stickyFill.style.width = `${percent}%`;
+        stickyTime.textContent = timeStr;
+    });
+
+    globalAudio.addEventListener('ended', () => {
+        syncPlayStateUI(false);
+        if(currentTrackFile && trackMap[currentTrackFile]) {
+            trackMap[currentTrackFile].progressFill.style.width = '0%';
+        }
+        stickyFill.style.width = '0%';
+    });
+
+    stickyPlayBtn.addEventListener('click', () => {
+        if(currentTrackFile) {
+            if (globalAudio.paused) globalAudio.play();
+            else globalAudio.pause();
+        }
+    });
+
+    stickyCloseBtn.addEventListener('click', () => {
+        globalAudio.pause();
+        stickyPlayer.classList.remove('visible');
+    });
+
+    let isStickyDragging = false;
+    let stickyDragPercentage = 0;
+
+    const updateStickyVisualsOnly = (e) => {
+        if(!globalAudio.duration) return;
+        const rect = stickyProgressTrack.getBoundingClientRect();
+        let percent = (e.clientX - rect.left) / rect.width;
+        percent = Math.max(0, Math.min(1, percent));
+        stickyDragPercentage = percent;
+
+        stickyFill.style.width = `${percent * 100}%`;
+        if(currentTrackFile && trackMap[currentTrackFile]) {
+             trackMap[currentTrackFile].progressFill.style.width = `${percent * 100}%`;
+        }
+    };
+
+    stickyProgressContainer.addEventListener('mousedown', (e) => {
+        isStickyDragging = true;
+        isUserSeeking = true;
+        updateStickyVisualsOnly(e);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (isStickyDragging) {
+            updateStickyVisualsOnly(e);
+        }
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (isStickyDragging) {
+            isStickyDragging = false;
+            isUserSeeking = false;
+            if(globalAudio.duration) {
+                globalAudio.currentTime = stickyDragPercentage * globalAudio.duration;
+            }
+        }
+    });
+
+    window.addEventListener('DOMContentLoaded', initPlayer);
+
+  </script>
+</body>
+</html>
