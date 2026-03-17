@@ -4,503 +4,170 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cyrus McCollim</title>
-  <meta name="description" content="Music portfolio of Cyrus McCollim.">
-  <meta name="theme-color" content="#070907">
-  <meta name="author" content="Cyrus McCollim">
-
+  <meta name="description" content="Portfolio of Cyrus McCollim, composer and pianist.">
+  <meta name="theme-color" content="#0a0a0a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200..800;1,9..40,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Nova+Mono&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <div id="layout-container">
-    <div id="grid">
+  <canvas class="ambient-canvas" id="ambient-canvas"></canvas>
 
-      
-      <div class="panel section-bio">
-        <div class="intro-top">
-          <div class="profile-img">
-            <img src="./files/profile.png" alt="Cyrus McCollim">
-          </div>
-          <!--
-          <div class="status-badge" id="commission-status">
-            <div class="status-dot"></div>
-            <span id="commission-text">Open to commissions</span>
-          </div>
-          -->
-        </div>
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">CM</a>
+    <div class="nav-links">
+      <a href="#music">Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-        <div class="bio-text">
-          <span class="label">Composer &middot; Pianist</span>
-          <h1>Cyrus McCollim</h1>
-          <p>
-            I enjoy writing for orchestra, solo piano, and instrument ensembles. My music is largely influenced by game and other media soundtracks.
-          </p>
-          <div class="bio-links" style="display: flex; gap: 12px; margin-top: auto; align-items: center; padding-top: 16px;">
-            <a href="mailto:contact@cyrusmccollim.music" class="bio-btn" style="background: rgba(255,255,255,0.9); color: #000; text-decoration: none; padding: 6px 16px; border-radius: 100px; font-weight: 500; font-size: 0.95rem;">Email</a>
-            <a href="https://open.spotify.com/artist/0jJ9N3jCnkzpVOtvjIiLZ4" aria-label="Spotify" class="bio-icon" style="color: #ffffff; display: flex; align-items: center; padding: 2px;">
-              <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.84.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.6.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-            </a>
-            <a href="https://music.youtube.com/channel/UClYvIGZH6ovaCoJHDHTlSgg" aria-label="YouTube" class="bio-icon" style="color: #ffffff; display: flex; align-items: center; padding: 2px;">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg>
-            </a>
-            <a href="https://music.apple.com/us/artist/cyrus-mccollim/1611277667" aria-label="Apple Music" class="bio-icon" style="color: #ffffff; display: flex; align-items: center; padding: 2px;">
-              <svg viewBox="0 0 24 24" width="24.15" height="24.15" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726a10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026c-.747.043-1.49.123-2.193.4c-1.336.53-2.3 1.452-2.865 2.78c-.192.448-.292.925-.363 1.408c-.056.392-.088.785-.1 1.18c0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424c.05.815.154 1.624.497 2.373c.65 1.42 1.738 2.353 3.234 2.801c.42.127.856.187 1.293.228c.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324c.113-.675.138-1.358.137-2.04c-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206c-.29.59-.76.962-1.388 1.14c-.35.1-.706.157-1.07.173c-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324c.378-.082.758-.153 1.134-.24c.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234c-.16.01-.318.035-.475.066c-.76.15-1.52.303-2.28.456l-2.325.47l-1.374.278c-.016.003-.032.01-.048.013c-.277.077-.377.203-.39.49c-.002.042 0 .086 0 .13c-.002 2.602 0 5.204-.003 7.805c0 .42-.047.836-.215 1.227c-.278.64-.77 1.04-1.434 1.233c-.35.1-.71.16-1.075.172c-.96.036-1.755-.6-1.92-1.544c-.14-.812.23-1.685 1.154-2.075c.357-.15.73-.232 1.108-.31c.287-.06.575-.116.86-.177c.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882c0-.123.013-.25.042-.37c.07-.285.273-.448.546-.518c.255-.066.515-.112.774-.165c.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403c.22-.043.442-.088.663-.106c.31-.025.523.17.554.482c.008.073.012.148.012.223c.002 1.91.002 3.822 0 5.732z"/></svg>
-            </a>
-          </div>
-        </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#hero">Home</a>
+    <a href="#music">Works</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-portrait">
+        <img src="../files/profile.png" alt="Cyrus McCollim" width="1024" height="1024">
+      </div>
+      <p class="hero-label">Composer · Pianist</p>
+      <h1 class="hero-name">Cyrus McCollim</h1>
+      <p class="hero-tagline">Writing music for orchestra,<br> solo piano, and small ensembles.</p>
+      <div class="hero-platforms">
+        <a href="https://open.spotify.com/artist/0jJ9N3jCnkzpVOtvjIiLZ4" target="_blank" rel="noopener" aria-label="Spotify">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          <span>Spotify</span>
+        </a>
+        <a href="https://music.youtube.com/channel/UClYvIGZH6ovaCoJHDHTlSgg" target="_blank" rel="noopener" aria-label="YouTube Music">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L16.2 12l-6.516 3.54z"/></svg>
+          <span>YouTube</span>
+        </a>
+        <a href="https://music.apple.com/us/artist/cyrus-mccollim/1611277667" target="_blank" rel="noopener" aria-label="Apple Music">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726a10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026c-.747.043-1.49.123-2.193.4c-1.336.53-2.3 1.452-2.865 2.78c-.192.448-.292.925-.363 1.408c-.056.392-.088.785-.1 1.18c0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424c.05.815.154 1.624.497 2.373c.65 1.42 1.738 2.353 3.234 2.801c.42.127.856.187 1.293.228c.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324c.113-.675.138-1.358.137-2.04c-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206c-.29.59-.76.962-1.388 1.14c-.35.1-.706.157-1.07.173c-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324c.378-.082.758-.153 1.134-.24c.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234c-.16.01-.318.035-.475.066c-.76.15-1.52.303-2.28.456l-2.325.47l-1.374.278c-.016.003-.032.01-.048.013c-.277.077-.377.203-.39.49c-.002.042 0 .086 0 .13c-.002 2.602 0 5.204-.003 7.805c0 .42-.047.836-.215 1.227c-.278.64-.77 1.04-1.434 1.233c-.35.1-.71.16-1.075.172c-.96.036-1.755-.6-1.92-1.544c-.14-.812.23-1.685 1.154-2.075c.357-.15.73-.232 1.108-.31c.287-.06.575-.116.86-.177c.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882c0-.123.013-.25.042-.37c.07-.285.273-.448.546-.518c.255-.066.515-.112.774-.165c.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403c.22-.043.442-.088.663-.106c.31-.025.523.17.554.482c.008.073.012.148.012.223c.002 1.91.002 3.822 0 5.732z"/></svg>
+          <span>Apple</span>
+        </a>
+      </div>
+    </div>
+    <a href="#music" class="hero-scroll">
+      <span>Portfolio</span>
+      <div class="hero-scroll-line"></div>
+    </a>
+  </section>
+
+  <section class="section music-section" id="music">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">Selected Works</h2>
       </div>
 
-      
-      <div class="panel section-music">
-        <div class="section-header-top">
+      <div class="music-tabs reveal">
+        <button class="music-tab active" data-tab="original">Original Compositions</button>
+        <button class="music-tab" data-tab="commissioned">Commissioned Work</button>
+      </div>
+
+      <div id="track-list" class="track-list"></div>
+    </div>
+  </section>
+
+  <section class="section about-section" id="about">
+    <div class="section-inner">
+      <div class="about-portrait reveal">
+        <img src="../files/profile.png" alt="Cyrus McCollim" width="1024" height="1024">
+        <div class="about-portrait-frame"></div>
+      </div>
+      <div class="about-text">
+        <div class="reveal">
+          <p class="section-label">About</p>
+        </div>
+        <p class="reveal">My journey started by wanting to play the music I heard in games I played and films I watched on the piano. That pulled me into taking learning piano seriously, which grew into a real interest in the theoretical side of music, and eventually into the desire to write the same kind of captivating music I enjoy myself.</p>
+        <p class="reveal">Piano and orchestra are where I feel most at home, but I like experimenting with different ensembles and instruments often. My process usually starts at the piano, playing around with ideas until something clicks, then gradually building the arrangement out from there.</p>
+        <p class="reveal">Aside from my original work, I've taken on commissioned projects ranging from piano compositions and arrangements, to full orchestral arrangements and score transcription.</p>
+        <div class="about-stats reveal">
           <div>
-            <span class="label">Music Portfolio</span>
-            <div style="display: flex; gap: 16px; align-items: center;">
-              <h2><button id="tab-original" onclick="switchTab('original')" style="background: none; border: none; font: inherit; color: var(--text-main); cursor: pointer; padding: 0; outline: none;">Original Compositions</button></h2>
-              <span style="color: var(--text-muted); font-size: 1.6rem; font-family: var(--font-display);">/</span>
-              <h2><button id="tab-commissioned" onclick="switchTab('commissioned')" style="background: none; border: none; font: inherit; color: var(--text-muted); cursor: pointer; padding: 0; outline: none;">Commissioned Work</button></h2>
-            </div>
+            <div class="about-stat-value">6+</div>
+            <div class="about-stat-label">Years Composing</div>
           </div>
-          <div class="copyright">&copy; 2026 Cyrus McCollim</div>
-        </div>
-
-        <div class="audio-player-container">
-          <div id="track-list">
-             <div class="loading-state" style="color:var(--text-muted); font-size:0.9rem;">Loading catalog...</div>
+          <div>
+            <div class="about-stat-value">3</div>
+            <div class="about-stat-label">Instruments</div>
+          </div>
+          <div>
+            <div class="about-stat-value">5</div>
+            <div class="about-stat-label">Released Tracks</div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      
-      <div class="panel section-contact">
-        <span class="label">Contact</span>
-        <h2 class="contact-header">Let's make something</h2>
+  <section class="section contact-section" id="contact">
+    <div class="section-inner">
+      <p class="section-label section-label--center reveal">Get in Touch</p>
+      <h2 class="contact-heading reveal">Let's Create Something</h2>
+      <p class="contact-sub reveal">Reach out via email for inquiries, collaborations, or just to say hello!</p>
 
-        <div class="email-container" style="position:relative; display:inline-block;">
-            <button id="email-btn" class="contact-email" style="background:none; border:none; padding:0; cursor:pointer; font:inherit; color:inherit;" aria-label="Copy email address">
-                contact@cyrusmccollim.music
-            </button>
-            <div id="email-tooltip" style="position:absolute; top:-30px; left:0; background:#333; color:#fff; padding:4px 8px; border-radius:4px; font-size:12px; opacity:0; pointer-events:none; transition:opacity 0.2s; white-space:nowrap;">Copied!</div>
-        </div>
+      <button class="contact-email-btn reveal" id="email-btn" data-email="contact@cyrusmccollim.music">
+        <span>contact@cyrusmccollim.music</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      </button>
 
-        <div class="social-links">
-          <a href="#" class="social-link">
-             <span>Fiverr</span>
-             <span>↗</span>
-          </a>
+      <div class="contact-tooltip" id="email-tooltip">Copied to clipboard</div>
+
+
+      <div class="contact-platforms reveal">
+        <a href="https://open.spotify.com/artist/0jJ9N3jCnkzpVOtvjIiLZ4" target="_blank" rel="noopener" class="contact-platform-link" aria-label="Spotify">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        </a>
+        <a href="https://music.youtube.com/channel/UClYvIGZH6ovaCoJHDHTlSgg" target="_blank" rel="noopener" class="contact-platform-link" aria-label="YouTube Music">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L16.2 12l-6.516 3.54z"/></svg>
+        </a>
+        <a href="https://music.apple.com/us/artist/cyrus-mccollim/1611277667" target="_blank" rel="noopener" class="contact-platform-link" aria-label="Apple Music">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726a10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026c-.747.043-1.49.123-2.193.4c-1.336.53-2.3 1.452-2.865 2.78c-.192.448-.292.925-.363 1.408c-.056.392-.088.785-.1 1.18c0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424c.05.815.154 1.624.497 2.373c.65 1.42 1.738 2.353 3.234 2.801c.42.127.856.187 1.293.228c.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324c.113-.675.138-1.358.137-2.04c-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206c-.29.59-.76.962-1.388 1.14c-.35.1-.706.157-1.07.173c-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324c.378-.082.758-.153 1.134-.24c.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234c-.16.01-.318.035-.475.066c-.76.15-1.52.303-2.28.456l-2.325.47l-1.374.278c-.016.003-.032.01-.048.013c-.277.077-.377.203-.39.49c-.002.042 0 .086 0 .13c-.002 2.602 0 5.204-.003 7.805c0 .42-.047.836-.215 1.227c-.278.64-.77 1.04-1.434 1.233c-.35.1-.71.16-1.075.172c-.96.036-1.755-.6-1.92-1.544c-.14-.812.23-1.685 1.154-2.075c.357-.15.73-.232 1.108-.31c.287-.06.575-.116.86-.177c.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882c0-.123.013-.25.042-.37c.07-.285.273-.448.546-.518c.255-.066.515-.112.774-.165c.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403c.22-.043.442-.088.663-.106c.31-.025.523.17.554.482c.008.073.012.148.012.223c.002 1.91.002 3.822 0 5.732z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-copy">&copy; 2026 Cyrus McCollim</span>
+    <a href="#hero" class="footer-back-top">
+      <span>Back to Top</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </a>
+  </footer>
+
+  <div class="sticky-player" id="sticky-player">
+    <div class="sticky-info">
+      <span class="sticky-track-name" id="sticky-title">—</span>
+    </div>
+    <div class="sticky-controls">
+      <button class="play-btn" id="sticky-play-btn" aria-label="Play/Pause">
+        <span class="play-icon"></span>
+      </button>
+      <div class="progress-container" id="sticky-progress">
+        <div class="progress-track">
+          <div class="progress-fill" id="sticky-progress-fill"></div>
+          <div class="progress-handle" id="sticky-progress-handle"></div>
         </div>
       </div>
-
+      <span class="time-display" id="sticky-time">0:00 / 0:00</span>
+    </div>
+    <div class="volume-control">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.08"/></svg>
+      <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
     </div>
   </div>
 
-  
-  <div id="sticky-player" class="sticky-player">
-     <div class="sticky-info">
-        <span id="sticky-title">--</span>
-     </div>
-     <div class="sticky-controls">
-        <button id="sticky-play" class="play-btn"><div class="play-icon"></div></button>
-        <div class="progress-container" id="sticky-progress-container">
-           <div class="progress-track"><div class="progress-fill" id="sticky-fill"><div class="progress-handle"></div></div></div>
-        </div>
-        <div class="time-display" id="sticky-time">00:00 / 00:00</div>
-        
-        <div class="volume-control">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-          <input type="range" class="volume-slider" id="global-volume" min="0" max="1" step="0.01" value="0.8">
-        </div>
-        <button id="sticky-close" class="close-btn" aria-label="Close Player">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-     </div>
-  </div>
-
-  <script>
-    const IS_OPEN_TO_COMMISSIONS = false;
-
-    const audioData = {
-      "original": {
-            "Acoustic": [
-                  "original/acoustic/Halloween Mischief.mp3",
-                  "original/acoustic/The Instigator Variation.mp3",
-                  "original/acoustic/The Instigator.mp3",
-                  "original/acoustic/Western Suite.mp3"
-            ],
-            "Orchestral": [
-                  "original/orchestral/Alarms Triggered.wav",
-                  "original/orchestral/Breach Protocol.mp3",
-                  "original/orchestral/Extraction Operation.wav",
-                  "original/orchestral/Falling.mp3"
-            ],
-            "Piano": [
-                  "original/piano/Falling.wav",
-                  "original/piano/Gentle Goodbye.wav",
-                  "original/piano/Memory.wav"
-            ]
-      }
-};
-
-    let currentTab = 'original';
-
-    function switchTab(tabId) {
-       currentTab = tabId;
-       document.getElementById('tab-original').style.color = tabId === 'original' ? 'var(--text-main)' : 'var(--text-muted)';
-       document.getElementById('tab-commissioned').style.color = tabId === 'commissioned' ? 'var(--text-main)' : 'var(--text-muted)';
-       initPlayer();
-    }
-
-    const audioPath = "./files/audio/";
-    const trackListContainer = document.getElementById('track-list');
-
-    const globalAudio = new Audio();
-    const trackMap = {};
-    let currentTrackFile = null;
-    let autoPlayInit = false;
-    let isUserSeeking = false;
-
-    const stickyPlayer = document.getElementById('sticky-player');
-    const stickyTitle = document.getElementById('sticky-title');
-    const stickyPlayBtn = document.getElementById('sticky-play');
-    const stickyProgressContainer = document.getElementById('sticky-progress-container');
-    const stickyProgressTrack = stickyProgressContainer.querySelector('.progress-track');
-    const stickyFill = document.getElementById('sticky-fill');
-    const stickyTime = document.getElementById('sticky-time');
-    const stickyCloseBtn = document.getElementById('sticky-close');
-
-    const volumeSlider = document.getElementById('global-volume');
-    globalAudio.volume = volumeSlider.value;
-    volumeSlider.addEventListener('input', (e) => {
-        globalAudio.volume = e.target.value;
-    });
-
-    function formatTime(seconds) {
-      if (isNaN(seconds)) return "00:00";
-      const m = Math.floor(seconds / 60);
-      const s = Math.floor(seconds % 60);
-      return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    }
-
-    function formatTitle(filename) {
-      return filename.split('/').pop().replace(/\.(mp3|wav|ogg)$/i, '').replace(/[-_]/g, ' ');
-    }
-
-    function copyTrackLink(e, filename, copyBtn) {
-        e.stopPropagation();
-        const url = new URL(window.location.href);
-        url.searchParams.set('track', filename);
-        navigator.clipboard.writeText(url.href).then(() => {
-            const originalHTML = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-            setTimeout(() => { copyBtn.innerHTML = originalHTML; }, 2000);
-        });
-    }
-
-    function syncPlayStateUI(isPlaying) {
-        Object.values(trackMap).forEach(t => {
-            t.playBtn.innerHTML = '<div class="play-icon"></div>';
-            t.el.classList.remove('playing');
-        });
-
-        const activeContainer = trackMap[currentTrackFile];
-        if(!activeContainer) return;
-
-        if (isPlaying) {
-            activeContainer.playBtn.innerHTML = '<div class="pause-icon"></div>';
-            activeContainer.el.classList.add('playing');
-            stickyPlayBtn.innerHTML = '<div class="pause-icon"></div>';
-        } else {
-            activeContainer.playBtn.innerHTML = '<div class="play-icon"></div>';
-            activeContainer.el.classList.remove('playing');
-            stickyPlayBtn.innerHTML = '<div class="play-icon"></div>';
-        }
-    }
-
-    function preloadDurations(files) {
-         files.forEach(filename => {
-              const a = new Audio(audioPath + filename);
-              a.preload = "metadata";
-              a.addEventListener('loadedmetadata', () => {
-                  if(trackMap[filename]) {
-                      trackMap[filename].timeDisplay.textContent = `00:00 / ${formatTime(a.duration)}`;
-                  }
-              });
-         });
-    }
-
-    function playTrack(filename) {
-        if (currentTrackFile === filename) {
-            if (globalAudio.paused) globalAudio.play();
-            else globalAudio.pause();
-        } else {
-            if (currentTrackFile && trackMap[currentTrackFile]) {
-                trackMap[currentTrackFile].el.classList.remove('active-track');
-                trackMap[currentTrackFile].progressFill.style.width = '0%';
-            }
-
-            currentTrackFile = filename;
-            globalAudio.src = audioPath + filename;
-            globalAudio.play();
-
-            const activeTrack = trackMap[filename];
-            activeTrack.el.classList.add('active-track');
-
-            stickyPlayer.classList.add('visible');
-            stickyTitle.textContent = formatTitle(filename);
-
-            syncPlayStateUI(true);
-        }
-    }
-
-    function initPlayer() {
-      trackListContainer.innerHTML = '';
-      let allFiles = [];
-
-      const currentAudioData = audioData[currentTab] || {};
-
-      for (const [category, files] of Object.entries(currentAudioData)) {
-         allFiles = allFiles.concat(files);
-         const categoryHeader = document.createElement('h3');
-         categoryHeader.className = 'category-header';
-         categoryHeader.textContent = category;
-         trackListContainer.appendChild(categoryHeader);
-
-         const categoryGrid = document.createElement('div');
-         categoryGrid.className = 'track-grid';
-
-         for (const file of files) {
-           createTrackItem(file, categoryGrid);
-         }
-         trackListContainer.appendChild(categoryGrid);
-      }
-
-      preloadDurations(allFiles);
-
-      const params = new URLSearchParams(window.location.search);
-      const trackParam = params.get('track');
-      if (trackParam && trackMap[trackParam]) {
-          const targetEl = trackMap[trackParam].el;
-          setTimeout(() => {
-              targetEl.scrollIntoView({behavior: 'smooth', block: 'center'});
-              targetEl.style.boxShadow = "0 0 15px rgba(52, 211, 153, 0.4)";
-              setTimeout(()=> { targetEl.style.boxShadow = "none"; }, 2000);
-          }, 500);
-      }
-    }
-
-    function createTrackItem(filename, container) {
-      const el = document.createElement('div');
-      el.className = 'track-item';
-
-      const titleWrapper = document.createElement('div');
-      titleWrapper.className = 'title-wrapper';
-
-      const title = document.createElement('div');
-      title.className = 'track-title';
-      title.textContent = formatTitle(filename);
-
-      const copyBtn = document.createElement('button');
-      copyBtn.className = 'copy-btn';
-      copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
-      copyBtn.addEventListener('click', (e) => copyTrackLink(e, filename, copyBtn));
-
-      titleWrapper.appendChild(title);
-      titleWrapper.appendChild(copyBtn);
-
-      const controls = document.createElement('div');
-      controls.className = 'track-controls';
-
-      const playBtn = document.createElement('button');
-      playBtn.className = 'play-btn';
-      playBtn.innerHTML = '<div class="play-icon"></div>';
-      playBtn.addEventListener('click', () => playTrack(filename));
-
-      const progressContainer = document.createElement('div');
-      progressContainer.className = 'progress-container';
-      const progressTrack = document.createElement('div');
-      progressTrack.className = 'progress-track';
-      const progressFill = document.createElement('div');
-      progressFill.className = 'progress-fill';
-      const progressHandle = document.createElement('div');
-      progressHandle.className = 'progress-handle';
-
-      progressFill.appendChild(progressHandle);
-      progressTrack.appendChild(progressFill);
-      progressContainer.appendChild(progressTrack);
-
-      const timeDisplay = document.createElement('div');
-      timeDisplay.className = 'time-display';
-      timeDisplay.textContent = "--:--";
-
-      const commissionStatus = document.getElementById('commission-status');
-    const commissionText = document.getElementById('commission-text');
-    
-    /*
-    if (typeof IS_OPEN_TO_COMMISSIONS !== 'undefined' && !IS_OPEN_TO_COMMISSIONS) {
-         commissionStatus.classList.add('status-closed');
-         commissionText.textContent = "Unavailable for commission";
-    }
-    */
-
-    const emailBtn = document.getElementById('email-btn');
-    const emailTooltip = document.getElementById('email-tooltip');
-
-    emailBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(emailBtn.textContent.trim()).then(() => {
-            emailTooltip.style.opacity = '1';
-            emailTooltip.style.transform = 'translateY(-5px)';
-            setTimeout(() => {
-                emailTooltip.style.opacity = '0';
-                emailTooltip.style.transform = 'translateY(0)';
-            }, 2000);
-        });
-    });
-
-    const bindSeek = (elem, progressTrackElem) => {
-          let isDragging = false;
-          let dragPercentage = 0;
-
-          const updateVisualsOnly = (e) => {
-             const rect = progressTrackElem.getBoundingClientRect();
-             let percent = (e.clientX - rect.left) / rect.width;
-             percent = Math.max(0, Math.min(1, percent));
-             dragPercentage = percent;
-
-             if(trackMap[currentTrackFile]) {
-                 trackMap[currentTrackFile].progressFill.style.width = `${percent * 100}%`;
-                 stickyFill.style.width = `${percent * 100}%`;
-             }
-          };
-
-          elem.addEventListener('mousedown', (e) => {
-             if(!globalAudio.duration || currentTrackFile !== filename) {
-                 playTrack(filename);
-                 setTimeout(()=>{
-                     isDragging = true;
-                     isUserSeeking = true;
-                     updateVisualsOnly(e);
-                 }, 50);
-                 return;
-             }
-             isDragging = true;
-             isUserSeeking = true;
-             updateVisualsOnly(e);
-          });
-
-          window.addEventListener('mousemove', (e) => {
-             if (isDragging && currentTrackFile === filename && globalAudio.duration) {
-                 updateVisualsOnly(e);
-             }
-          });
-
-          window.addEventListener('mouseup', () => {
-             if (isDragging) {
-                 isDragging = false;
-                 isUserSeeking = false;
-                 if(globalAudio.duration) {
-                    globalAudio.currentTime = dragPercentage * globalAudio.duration;
-                 }
-             }
-          });
-      };
-      bindSeek(progressContainer, progressTrack);
-
-      controls.appendChild(playBtn);
-      controls.appendChild(progressContainer);
-      controls.appendChild(timeDisplay);
-
-      el.appendChild(titleWrapper);
-      el.appendChild(controls);
-      container.appendChild(el);
-
-      trackMap[filename] = {
-          el, playBtn, progressFill, timeDisplay
-      };
-    }
-
-    globalAudio.addEventListener('play', () => syncPlayStateUI(true));
-    globalAudio.addEventListener('pause', () => syncPlayStateUI(false));
-
-    globalAudio.addEventListener('timeupdate', () => {
-        if(!globalAudio.duration || !currentTrackFile || isUserSeeking) return;
-
-        const activeTrack = trackMap[currentTrackFile];
-        const percent = (globalAudio.currentTime / globalAudio.duration) * 100;
-        const timeStr = `${formatTime(globalAudio.currentTime)} / ${formatTime(globalAudio.duration)}`;
-
-        if(activeTrack) {
-            activeTrack.progressFill.style.width = `${percent}%`;
-            activeTrack.timeDisplay.textContent = timeStr;
-        }
-
-        stickyFill.style.width = `${percent}%`;
-        stickyTime.textContent = timeStr;
-    });
-
-    globalAudio.addEventListener('ended', () => {
-        syncPlayStateUI(false);
-        if(currentTrackFile && trackMap[currentTrackFile]) {
-            trackMap[currentTrackFile].progressFill.style.width = '0%';
-        }
-        stickyFill.style.width = '0%';
-    });
-
-    stickyPlayBtn.addEventListener('click', () => {
-        if(currentTrackFile) {
-            if (globalAudio.paused) globalAudio.play();
-            else globalAudio.pause();
-        }
-    });
-
-    stickyCloseBtn.addEventListener('click', () => {
-        globalAudio.pause();
-        stickyPlayer.classList.remove('visible');
-    });
-
-    let isStickyDragging = false;
-    let stickyDragPercentage = 0;
-
-    const updateStickyVisualsOnly = (e) => {
-        if(!globalAudio.duration) return;
-        const rect = stickyProgressTrack.getBoundingClientRect();
-        let percent = (e.clientX - rect.left) / rect.width;
-        percent = Math.max(0, Math.min(1, percent));
-        stickyDragPercentage = percent;
-
-        stickyFill.style.width = `${percent * 100}%`;
-        if(currentTrackFile && trackMap[currentTrackFile]) {
-             trackMap[currentTrackFile].progressFill.style.width = `${percent * 100}%`;
-        }
-    };
-
-    stickyProgressContainer.addEventListener('mousedown', (e) => {
-        isStickyDragging = true;
-        isUserSeeking = true;
-        updateStickyVisualsOnly(e);
-    });
-
-    window.addEventListener('mousemove', (e) => {
-        if (isStickyDragging) {
-            updateStickyVisualsOnly(e);
-        }
-    });
-
-    window.addEventListener('mouseup', () => {
-        if (isStickyDragging) {
-            isStickyDragging = false;
-            isUserSeeking = false;
-            if(globalAudio.duration) {
-                globalAudio.currentTime = stickyDragPercentage * globalAudio.duration;
-            }
-        }
-    });
-
-    window.addEventListener('DOMContentLoaded', initPlayer);
-
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
