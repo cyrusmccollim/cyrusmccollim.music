@@ -21,7 +21,6 @@ const audioData = {
 };
 
 const AUDIO_BASE = "files/audio/";
-const WAVEFORM_BARS = 70;
 
 var currentAudio = null;
 var currentTrackEl = null;
@@ -146,7 +145,7 @@ function loadWaveform(path, canvas) {
     return;
   }
 
-  var peaks = generateStaticPeaks(path, WAVEFORM_BARS);
+  var peaks = generateStaticPeaks(path, 200);
   waveformCache[path] = peaks;
   drawWaveform(canvas, peaks, 0);
 
@@ -164,6 +163,24 @@ function loadWaveform(path, canvas) {
   });
 }
 
+function resamplePeaks(peaks, targetCount) {
+  if (peaks.length === targetCount) return peaks;
+  var result = [];
+  var ratio = peaks.length / targetCount;
+  for (var i = 0; i < targetCount; i++) {
+    var srcStart = i * ratio;
+    var srcEnd = srcStart + ratio;
+    var startIdx = Math.floor(srcStart);
+    var endIdx = Math.min(Math.ceil(srcEnd), peaks.length);
+    var max = 0;
+    for (var j = startIdx; j < endIdx; j++) {
+      if (peaks[j] > max) max = peaks[j];
+    }
+    result.push(max);
+  }
+  return result;
+}
+
 function drawWaveform(canvas, peaks, playedPct) {
   var ctx = canvas.getContext("2d");
   var dpr = window.devicePixelRatio || 1;
@@ -175,16 +192,25 @@ function drawWaveform(canvas, peaks, playedPct) {
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, w, h);
 
-  var barCount = peaks.length;
+  // Target: each bar is ~2px wide with ~2px gap = ~4px per bar
+  var barWidth = 2;
   var gap = 2;
-  var barWidth = (w - gap * (barCount - 1)) / barCount;
+  var step = barWidth + gap;
+  var barCount = Math.max(10, Math.floor(w / step));
+  var displayPeaks = resamplePeaks(peaks, barCount);
+
+  // Recalculate to fill width evenly
+  var totalGap = gap * (barCount - 1);
+  barWidth = (w - totalGap) / barCount;
   if (barWidth < 1) barWidth = 1;
+
   var minBarH = 2;
   var maxBarH = h;
   var centerY = h / 2;
+  var radius = Math.min(1, barWidth / 2);
 
   for (var i = 0; i < barCount; i++) {
-    var barH = Math.max(minBarH, peaks[i] * maxBarH);
+    var barH = Math.max(minBarH, displayPeaks[i] * maxBarH);
     var x = i * (barWidth + gap);
     var barPct = (x + barWidth) / w;
 
@@ -198,7 +224,7 @@ function drawWaveform(canvas, peaks, playedPct) {
 
     var y = centerY - barH / 2;
     ctx.beginPath();
-    ctx.roundRect(x, y, barWidth, barH, 1);
+    ctx.roundRect(x, y, barWidth, barH, radius);
     ctx.fill();
   }
 }
