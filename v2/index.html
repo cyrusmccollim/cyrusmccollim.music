@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyrus McCollim — Composer · Pianist</title>
+  <meta name="description" content="Portfolio of Cyrus McCollim, composer and pianist. Original compositions for orchestra, solo piano, and instrument ensembles.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="../files/profile.png">
+</head>
+<body>
+
+  <!-- Ambient Canvas Background -->
+  <canvas class="ambient-canvas" id="ambient-canvas"></canvas>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">CM</a>
+    <div class="nav-links">
+      <a href="#music">Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#hero">Home</a>
+    <a href="#music">Works</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- ════════════════════════════════════════════════ -->
+  <!-- HERO SECTION -->
+  <!-- ════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-portrait">
+        <img src="../files/profile.png" alt="Cyrus McCollim" width="1024" height="1024">
+      </div>
+      <p class="hero-label">Composer · Pianist</p>
+      <h1 class="hero-name">Cyrus<br>McCollim</h1>
+      <p class="hero-tagline">Crafting cinematic soundscapes for orchestra,<br> solo piano, and ensemble.</p>
+      <div class="hero-platforms">
+        <a href="https://open.spotify.com/artist/0jJ9N3jCnkzpVOtvjIiLZ4" target="_blank" rel="noopener" aria-label="Spotify">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          <span>Spotify</span>
+        </a>
+        <a href="https://music.youtube.com/channel/UClYvIGZH6ovaCoJHDHTlSgg" target="_blank" rel="noopener" aria-label="YouTube Music">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L16.2 12l-6.516 3.54z"/></svg>
+          <span>YouTube</span>
+        </a>
+        <a href="https://music.apple.com/us/artist/cyrus-mccollim/1611277667" target="_blank" rel="noopener" aria-label="Apple Music">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043A5.022 5.022 0 0019.7.175 10.1 10.1 0 0018.04.029C17.468.009 16.906 0 16.334 0H7.666c-.572 0-1.134.009-1.706.029A10.1 10.1 0 004.3.175a5.02 5.02 0 00-1.874.716C1.31 1.607.566 2.607.249 3.917a9.23 9.23 0 00-.24 2.19C-.01 6.68 0 7.252 0 7.824v8.352c0 .572-.009 1.144.009 1.706.031.741.114 1.476.24 2.19.317 1.31 1.062 2.31 2.18 3.043A5.022 5.022 0 004.3 23.83c.58.09 1.166.14 1.755.16.572.02 1.134.01 1.706.01h8.668c.572 0 1.134.01 1.706-.01a10.1 10.1 0 001.755-.16 5.02 5.02 0 001.874-.716c1.117-.733 1.862-1.733 2.18-3.043.125-.714.208-1.449.24-2.19.019-.562.009-1.134.009-1.706V7.824c0-.572.01-1.144-.01-1.7zM16.949 15.47c0 .63-.08 1.25-.35 1.84-.37.79-.99 1.32-1.79 1.59-.46.16-.94.22-1.43.2-.65-.04-1.22-.25-1.72-.65-.61-.5-.89-1.14-.9-1.93-.01-1.03.63-1.87 1.63-2.16.51-.15 1.04-.22 1.56-.29.52-.06 1.04-.12 1.5-.29.1-.04.18-.1.18-.22v-.04c.01-.72-.39-1.2-1.07-1.27-.27-.03-.55-.02-.82.04-.42.1-.7.38-.81.79-.03.1-.07.13-.17.12l-1.56-.22c-.09-.01-.13-.05-.11-.14.17-.96.72-1.58 1.63-1.87.5-.16 1.01-.22 1.54-.2.5.02.98.1 1.44.3.73.32 1.14.89 1.23 1.67.02.16.03.33.03.49v2.35h-.01zm-2.83-.59c-.42.06-.84.1-1.24.22-.41.12-.67.41-.72.84-.05.45.15.84.56 1.01.24.1.49.13.75.11.52-.04.93-.27 1.22-.7.26-.38.39-.81.4-1.27v-.32c-.02.02-.09.05-.19.07l-.78.04z"/></svg>
+          <span>Apple</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Explore Works</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ -->
+  <!-- MUSIC SECTION -->
+  <!-- ════════════════════════════════════════════════ -->
+  <section class="section music-section" id="music">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">Selected Works</h2>
+      </div>
+
+      <div class="music-tabs reveal">
+        <button class="music-tab active" data-tab="original">Original Compositions</button>
+        <button class="music-tab" data-tab="commissioned">Commissioned Work</button>
+      </div>
+
+      <div class="volume-control reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.08"/></svg>
+        <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="0.8">
+      </div>
+
+      <div id="track-list" class="track-list">
+        <!-- Tracks injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ -->
+  <!-- ABOUT SECTION -->
+  <!-- ════════════════════════════════════════════════ -->
+  <section class="section about-section" id="about">
+    <div class="section-inner">
+      <div class="about-portrait reveal">
+        <img src="../files/profile.png" alt="Cyrus McCollim" width="1024" height="1024">
+        <div class="about-portrait-frame"></div>
+      </div>
+      <div class="about-text">
+        <div class="reveal">
+          <p class="section-label">About</p>
+          <h3>The Composer</h3>
+        </div>
+        <p class="reveal">I enjoy writing for orchestra, solo piano, and instrument ensembles. My music is largely influenced by game and other media soundtracks.</p>
+        <div class="about-stats reveal">
+          <div>
+            <div class="about-stat-value" id="stat-tracks">11</div>
+            <div class="about-stat-label">Tracks</div>
+          </div>
+          <div>
+            <div class="about-stat-value">3</div>
+            <div class="about-stat-label">Genres</div>
+          </div>
+          <div>
+            <div class="about-stat-value">3</div>
+            <div class="about-stat-label">Platforms</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ -->
+  <!-- CONTACT SECTION -->
+  <!-- ════════════════════════════════════════════════ -->
+  <section class="section contact-section" id="contact">
+    <div class="section-inner">
+      <p class="section-label reveal" style="justify-content: center;">Get in Touch</p>
+      <h2 class="contact-heading reveal">Let's Create<br>Something Together</h2>
+      <p class="contact-sub reveal">Reach out via email for inquiries, collaborations, or just to say hello.</p>
+
+      <button class="contact-email-btn reveal" id="email-btn" data-email="contact@cyrusmccollim.music">
+        <span>contact@cyrusmccollim.music</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      </button>
+
+      <div class="contact-tooltip" id="email-tooltip">Copied to clipboard</div>
+
+      <div class="commission-status reveal">
+        <span class="status-dot"></span>
+        <span id="commission-text">Commissions currently closed</span>
+      </div>
+
+      <div class="contact-platforms reveal">
+        <a href="https://open.spotify.com/artist/0jJ9N3jCnkzpVOtvjIiLZ4" target="_blank" rel="noopener" class="contact-platform-link" aria-label="Spotify">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        </a>
+        <a href="https://music.youtube.com/channel/UClYvIGZH6ovaCoJHDHTlSgg" target="_blank" rel="noopener" class="contact-platform-link" aria-label="YouTube Music">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L16.2 12l-6.516 3.54z"/></svg>
+        </a>
+        <a href="https://music.apple.com/us/artist/cyrus-mccollim/1611277667" target="_blank" rel="noopener" class="contact-platform-link" aria-label="Apple Music">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043A5.022 5.022 0 0019.7.175 10.1 10.1 0 0018.04.029C17.468.009 16.906 0 16.334 0H7.666c-.572 0-1.134.009-1.706.029A10.1 10.1 0 004.3.175a5.02 5.02 0 00-1.874.716C1.31 1.607.566 2.607.249 3.917a9.23 9.23 0 00-.24 2.19C-.01 6.68 0 7.252 0 7.824v8.352c0 .572-.009 1.144.009 1.706.031.741.114 1.476.24 2.19.317 1.31 1.062 2.31 2.18 3.043A5.022 5.022 0 004.3 23.83c.58.09 1.166.14 1.755.16.572.02 1.134.01 1.706.01h8.668c.572 0 1.134.01 1.706-.01a10.1 10.1 0 001.755-.16 5.02 5.02 0 001.874-.716c1.117-.733 1.862-1.733 2.18-3.043.125-.714.208-1.449.24-2.19.019-.562.009-1.134.009-1.706V7.824c0-.572.01-1.144-.01-1.7zM16.949 15.47c0 .63-.08 1.25-.35 1.84-.37.79-.99 1.32-1.79 1.59-.46.16-.94.22-1.43.2-.65-.04-1.22-.25-1.72-.65-.61-.5-.89-1.14-.9-1.93-.01-1.03.63-1.87 1.63-2.16.51-.15 1.04-.22 1.56-.29.52-.06 1.04-.12 1.5-.29.1-.04.18-.1.18-.22v-.04c.01-.72-.39-1.2-1.07-1.27-.27-.03-.55-.02-.82.04-.42.1-.7.38-.81.79-.03.1-.07.13-.17.12l-1.56-.22c-.09-.01-.13-.05-.11-.14.17-.96.72-1.58 1.63-1.87.5-.16 1.01-.22 1.54-.2.5.02.98.1 1.44.3.73.32 1.14.89 1.23 1.67.02.16.03.33.03.49v2.35h-.01zm-2.83-.59c-.42.06-.84.1-1.24.22-.41.12-.67.41-.72.84-.05.45.15.84.56 1.01.24.1.49.13.75.11.52-.04.93-.27 1.22-.7.26-.38.39-.81.4-1.27v-.32c-.02.02-.09.05-.19.07l-.78.04z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-copy">&copy; 2026 Cyrus McCollim</span>
+    <a href="#hero" class="footer-back-top">
+      <span>Back to Top</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </a>
+  </footer>
+
+  <!-- ════════════════════════════════════════════════ -->
+  <!-- STICKY PLAYER -->
+  <!-- ════════════════════════════════════════════════ -->
+  <div class="sticky-player" id="sticky-player">
+    <div class="sticky-info">
+      <span class="sticky-track-name" id="sticky-title">—</span>
+    </div>
+    <div class="sticky-controls">
+      <button class="play-btn" id="sticky-play-btn" aria-label="Play/Pause">
+        <span class="play-icon"></span>
+      </button>
+      <div class="progress-container" id="sticky-progress">
+        <div class="progress-track">
+          <div class="progress-fill" id="sticky-progress-fill"></div>
+          <div class="progress-handle" id="sticky-progress-handle"></div>
+        </div>
+      </div>
+      <span class="time-display" id="sticky-time">0:00 / 0:00</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
