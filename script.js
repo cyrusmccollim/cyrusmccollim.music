@@ -20,7 +20,7 @@ const audioData = {
   }
 };
 
-const AUDIO_BASE = "../files/audio/";
+const AUDIO_BASE = "files/audio/";
 const WAVEFORM_BARS = 70;
 
 var currentAudio = null;
