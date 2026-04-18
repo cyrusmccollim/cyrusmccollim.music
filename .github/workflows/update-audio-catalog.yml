@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Rebuild index.html JSON
+      - name: Rebuild script.js JSON
         run: node .github/scripts/update-catalog.js
 
       - name: Commit and Push
@@ -30,8 +30,8 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-          if ! git diff --exit-code index.html > /dev/null; then
-            git add index.html
+          if ! git diff --exit-code script.js > /dev/null; then
+            git add script.js
             git commit -m "Update audio track catalog"
             git push
           fi

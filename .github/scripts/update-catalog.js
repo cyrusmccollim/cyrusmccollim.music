@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const audioDir = path.join(__dirname, '../../files/audio');
-const htmlFile = path.join(__dirname, '../../index.html');
+const scriptFile = path.join(__dirname, '../../script.js');
 
 try {
-    if (!fs.existsSync(audioDir) || !fs.existsSync(htmlFile)) {
+    if (!fs.existsSync(audioDir) || !fs.existsSync(scriptFile)) {
         process.exit(1);
     }
 
@@ -36,25 +36,25 @@ try {
         }
     });
 
-    let htmlContent = fs.readFileSync(htmlFile, 'utf8');
+    let scriptContent = fs.readFileSync(scriptFile, 'utf8');
 
-    // Find where audioData is assigned in index.html
+    // Find where audioData is assigned in script.js
     const markerStart = 'const audioData = ';
-    const startIndex = htmlContent.indexOf(markerStart);
+    const startIndex = scriptContent.indexOf(markerStart);
     if (startIndex === -1) process.exit(1);
 
-    const startObjIndex = htmlContent.indexOf('{', startIndex);
+    const startObjIndex = scriptContent.indexOf('{', startIndex);
     let braceCount = 0;
     let endIndex = -1;
 
     if (startObjIndex !== -1) {
-        for (let i = startObjIndex; i < htmlContent.length; i++) {
-            if (htmlContent[i] === '{') braceCount++;
-            else if (htmlContent[i] === '}') braceCount--;
+        for (let i = startObjIndex; i < scriptContent.length; i++) {
+            if (scriptContent[i] === '{') braceCount++;
+            else if (scriptContent[i] === '}') braceCount--;
 
             if (braceCount === 0) {
                 // Find trailing semicolon
-                const semiIndex = htmlContent.indexOf(';', i);
+                const semiIndex = scriptContent.indexOf(';', i);
                 endIndex = (semiIndex !== -1 && semiIndex - i < 10) ? semiIndex : i;
                 break;
             }
@@ -64,9 +64,9 @@ try {
     if (endIndex === -1) process.exit(1);
 
     const newAudioData = `const audioData = ${JSON.stringify(catalog, null, 6)};`;
-    const finalHtml = htmlContent.substring(0, startIndex) + newAudioData + htmlContent.substring(endIndex + 1);
+    const finalScript = scriptContent.substring(0, startIndex) + newAudioData + scriptContent.substring(endIndex + 1);
 
-    fs.writeFileSync(htmlFile, finalHtml, 'utf8');
+    fs.writeFileSync(scriptFile, finalScript, 'utf8');
 } catch (error) {
     process.exit(1);
 }
