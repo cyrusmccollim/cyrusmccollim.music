@@ -499,6 +499,8 @@ function resetTrackUI(el) {
     var peaks = waveformCache[path];
     if (peaks) drawWaveform(canvas, peaks, 0);
   }
+  var icon = el.querySelector(".play-btn .pause-icon");
+  if (icon) icon.className = "play-icon";
   el.classList.remove("playing");
 }
 
