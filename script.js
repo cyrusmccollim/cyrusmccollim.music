@@ -1,23 +1,23 @@
 const audioData = {
-  "original": {
-    "Acoustic": [
-      "original/acoustic/Halloween Mischief.mp3",
-      "original/acoustic/The Instigator Variation.mp3",
-      "original/acoustic/The Instigator.mp3",
-      "original/acoustic/Western Suite.mp3"
-    ],
-    "Orchestral": [
-      "original/orchestral/Alarms Triggered.wav",
-      "original/orchestral/Breach Protocol.mp3",
-      "original/orchestral/Extraction Operation.wav",
-      "original/orchestral/Falling.mp3"
-    ],
-    "Piano": [
-      "original/piano/Falling.wav",
-      "original/piano/Gentle Goodbye.wav",
-      "original/piano/Memory.wav"
-    ]
-  }
+      "original": {
+            "Acoustic": [
+                  "original/acoustic/Halloween Mischief.wav",
+                  "original/acoustic/The Instigator Variation.mp3",
+                  "original/acoustic/The Instigator.mp3",
+                  "original/acoustic/Western Suite.mp3"
+            ],
+            "Orchestral": [
+                  "original/orchestral/Alarms Triggered.wav",
+                  "original/orchestral/Breach Protocol.mp3",
+                  "original/orchestral/Extraction Operation.wav",
+                  "original/orchestral/Falling.mp3"
+            ],
+            "Piano": [
+                  "original/piano/Falling.wav",
+                  "original/piano/Gentle Goodbye.wav",
+                  "original/piano/Memory.wav"
+            ]
+      }
 };
 
 const AUDIO_BASE = "files/audio/";
@@ -290,10 +290,6 @@ function renderTracks(tab) {
       info.appendChild(num);
       info.appendChild(title);
 
-      var eqBars = document.createElement("div");
-      eqBars.className = "eq-bars";
-      for (var b = 0; b < 4; b++) eqBars.appendChild(document.createElement("span"));
-      info.appendChild(eqBars);
 
       var actions = document.createElement("div");
       actions.className = "track-actions";
