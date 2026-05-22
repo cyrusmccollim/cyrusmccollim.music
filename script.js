@@ -10,7 +10,6 @@ const audioData = {
                   "original/orchestral/Alarms Triggered.mp3",
                   "original/orchestral/Breach Protocol.mp3",
                   "original/orchestral/Escape The Compound.mp3",
-                  "original/orchestral/Extraction Operation.wav",
                   "original/orchestral/Falling.mp3",
                   "original/orchestral/Stealth Takeout.mp3"
             ],
