@@ -7,6 +7,7 @@ const audioData = {
                   "original/acoustic/Western Suite.mp3"
             ],
             "Orchestral": [
+                  "original/orchestral/Alarms Triggered.mp3",
                   "original/orchestral/Breach Protocol.mp3",
                   "original/orchestral/Escape The Compound.mp3",
                   "original/orchestral/Extraction Operation.wav",
