@@ -1,7 +1,10 @@
 const audioData = {
       "original": {
             "Acoustic": [
+                  "original/acoustic/Cowboy Crossing.mp3",
+                  "original/acoustic/Easy Drifter.mp3",
                   "original/acoustic/Espionage.mp3",
+                  "original/acoustic/Ghost Town.mp3",
                   "original/acoustic/Halloween Mischief.mp3",
                   "original/acoustic/The Instigator Variation.mp3",
                   "original/acoustic/The Instigator.mp3"
