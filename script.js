@@ -3,8 +3,7 @@ const audioData = {
             "Acoustic": [
                   "original/acoustic/Halloween Mischief.mp3",
                   "original/acoustic/The Instigator Variation.mp3",
-                  "original/acoustic/The Instigator.mp3",
-                  "original/acoustic/Western Suite.mp3"
+                  "original/acoustic/The Instigator.mp3"
             ],
             "Orchestral": [
                   "original/orchestral/Alarms Triggered.mp3",
