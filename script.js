@@ -21,6 +21,11 @@ const audioData = {
                   "original/piano/Falling.wav",
                   "original/piano/Gentle Goodbye.wav",
                   "original/piano/Memory.wav"
+            ],
+            "Rock": [
+                  "original/rock/Inadvertent.mp3",
+                  "original/rock/Spies.mp3",
+                  "original/rock/Suspended.mp3"
             ]
       }
 };
