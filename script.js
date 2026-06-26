@@ -24,8 +24,7 @@ const audioData = {
             ],
             "Rock": [
                   "original/rock/Inadvertent.mp3",
-                  "original/rock/Spies.mp3",
-                  "original/rock/Suspended.mp3"
+                  "original/rock/Spies.mp3"
             ]
       }
 };
