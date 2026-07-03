@@ -11,11 +11,13 @@ const audioData = {
             ],
             "Orchestral": [
                   "original/orchestral/Alarms Triggered.mp3",
+                  "original/orchestral/Ascend.mp3",
                   "original/orchestral/Breach Protocol.mp3",
                   "original/orchestral/Escape The Compound.mp3",
                   "original/orchestral/Extraction Operation.mp3",
                   "original/orchestral/Falling.mp3",
-                  "original/orchestral/Stealth Takeout.mp3"
+                  "original/orchestral/Stealth Takeout.mp3",
+                  "original/orchestral/Wicked Waltz.mp3"
             ],
             "Piano": [
                   "original/piano/Falling.wav",
