@@ -73,6 +73,7 @@ var stickyProgressFill = document.getElementById("sticky-progress-fill");
 var stickyProgressHandle = document.getElementById("sticky-progress-handle");
 var stickyTime = document.getElementById("sticky-time");
 var volumeSlider = document.getElementById("volume-slider");
+volumeSlider.value = 0.3; // Set initial volume to 30%
 var emailBtn = document.getElementById("email-btn");
 var emailTooltip = document.getElementById("email-tooltip");
 var nav = document.getElementById("nav");
@@ -269,7 +270,7 @@ function renderTracks(tab) {
 
     var catCount = document.createElement("span");
     catCount.className = "category-count";
-    catCount.textContent = tracks.length + " track" + (tracks.length !== 1 ? "s" : "");
+    catCount.textContent = tracks.length + " TRACK" + (tracks.length !== 1 ? "S" : "");
 
     header.appendChild(catName);
     header.appendChild(catCount);
@@ -444,6 +445,20 @@ trackList.addEventListener("click", function(e) {
   currentAudio.volume = parseFloat(volumeSlider.value);
   currentTrackEl = item;
   item.classList.add("active-track", "playing");
+  // Ensure sticky player is visible when a new track is initiated.
+  stickyPlayer.classList.add("visible");
+
+  // Ensure waveform is drawn for the newly active track immediately
+  var newCanvas = currentTrackEl.querySelector(".waveform-canvas");
+  if (newCanvas) {
+    var newPath = newCanvas.dataset.path;
+    if (waveformCache[newPath]) {
+      drawWaveform(newCanvas, waveformCache[newPath], 0);
+    } else {
+      // Fallback or trigger a load if not in cache (should be, due to intersection observer)
+      loadWaveform(newPath, newCanvas);
+    }
+  }
 
   currentAudio.play().then(function() {
     setPlayingState(true);
@@ -452,6 +467,7 @@ trackList.addEventListener("click", function(e) {
     handlePlayError(err);
     item.classList.remove("active-track", "playing");
     currentTrackEl = null;
+    setPlayingState(false);
   });
 
   currentAudio.addEventListener("timeupdate", updateProgress);
@@ -459,8 +475,44 @@ trackList.addEventListener("click", function(e) {
     setPlayingState(false);
     resetTrackUI(item);
     item.classList.remove("active-track", "playing");
-    stickyPlayer.classList.remove("visible");
-    currentTrackEl = null;
+
+    // Autoplay next track logic
+    var currentPath = item.dataset.path;
+    var categories = audioData[currentTab];
+    var allTracksInOrder = [];
+    var categoryNames = Object.keys(categories);
+
+    // Populate allTracksInOrder with the correct category index for cycling
+    for (let i = 0; i < categoryNames.length; i++) {
+        let catName = categoryNames[i];
+        categories[catName].forEach(trackPath => {
+            allTracksInOrder.push({ category: catName, path: trackPath });
+        });
+    }
+
+    var currentTrackIndexInOrder = -1;
+    for (let i = 0; i < allTracksInOrder.length; i++) {
+      if (allTracksInOrder[i].path === currentPath) {
+        currentTrackIndexInOrder = i;
+        break;
+      }
+    }
+
+    if (currentTrackIndexInOrder !== -1) {
+      var nextTrackIndexInOrder = (currentTrackIndexInOrder + 1) % allTracksInOrder.length;
+      var nextTrack = allTracksInOrder[nextTrackIndexInOrder];
+
+      // Find the track item element for the next track and simulate a click
+      var nextTrackEl = document.querySelector(`.track-item[data-path="${nextTrack.path}"]`);
+      if (nextTrackEl) {
+        // Scroll the next track into view if needed
+        nextTrackEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        var playButton = nextTrackEl.querySelector(".play-btn");
+        if (playButton) {
+          playButton.click(); // Simulate click to play next track
+        }
+      }
+    }
   });
   currentAudio.addEventListener("loadedmetadata", function() {
     durations[path] = currentAudio.duration;
@@ -471,7 +523,7 @@ trackList.addEventListener("click", function(e) {
 
 function handlePlayError(err) {
   if (err.name !== "AbortError") {
-    console.warn("Playback failed:", err.message);
+    console.error("Playback failed:", err.message, err);
   }
 }
 
@@ -492,6 +544,7 @@ function fallbackCopy(text, btn) {
 
 function setPlayingState(playing) {
   isPlaying = playing;
+  console.log("setPlayingState called with:", playing, "currentTrackEl:", currentTrackEl?.dataset?.path);
   if (currentTrackEl) {
     var icon = currentTrackEl.querySelector(".play-btn .play-icon, .play-btn .pause-icon");
     if (icon) icon.className = playing ? "pause-icon" : "play-icon";
@@ -518,8 +571,12 @@ function resetTrackUI(el) {
 }
 
 function updateProgress() {
-  if (!currentAudio || !currentTrackEl) return;
-  var pct = (currentAudio.currentTime / currentAudio.duration) * 100 || 0;
+  if (!currentAudio || !currentTrackEl || !isFinite(currentAudio.duration) || currentAudio.duration === 0) {
+    return;
+  }
+  // console.log(`updateProgress: currentTime=${currentAudio.currentTime}, duration=${currentAudio.duration}`);
+  var pct = (currentAudio.currentTime / currentAudio.duration) * 100;
+
   var pctDecimal = pct / 100;
   var timeStr = formatTime(currentAudio.currentTime) + " / " + formatTime(currentAudio.duration);
 
