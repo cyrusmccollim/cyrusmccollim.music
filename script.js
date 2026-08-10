@@ -24,6 +24,7 @@ const audioData = {
                   "original/orchestral/Extraction Operation.mp3",
                   "original/orchestral/Falling.mp3",
                   "original/orchestral/Stealth Takeout.mp3",
+                  "original/orchestral/The Jester.mp3",
                   "original/orchestral/Wicked Waltz.mp3"
             ],
             "Piano": [
