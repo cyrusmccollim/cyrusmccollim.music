@@ -65,7 +65,6 @@ export const tracks: Record<string, TrackInfo[]> = {
   commissioned: [],
 };
 
-// Flatten and parse
 Object.entries(rawAudioData).forEach(([group, categories]) => {
   Object.entries(categories).forEach(([category, paths]) => {
     paths.forEach((path) => {
@@ -80,3 +79,6 @@ Object.entries(rawAudioData).forEach(([group, categories]) => {
     });
   });
 });
+
+export const allTracks: TrackInfo[] = [...tracks.original, ...tracks.commissioned];
+

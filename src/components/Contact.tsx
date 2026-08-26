@@ -3,7 +3,7 @@ import { Copy, Check, ArrowUpRight } from 'lucide-react';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
-  const email = "contact@cyrusmccollim.music";
+  const email = "music@cyrusmccollim.com";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);

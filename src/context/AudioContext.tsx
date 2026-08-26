@@ -102,21 +102,27 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    const idx = queueRef.current.findIndex(t => t.path === track.path);
-    if (idx !== -1) {
-      currentIndexRef.current = idx;
-    } else {
-      queueRef.current = [track];
-      currentIndexRef.current = 0;
-    }
-
+    queueRef.current = [track];
+    currentIndexRef.current = 0;
     setCurrentTrack(track);
-    audioRef.current.src = import.meta.env.BASE_URL + AUDIO_BASE + encodePath(track.path);
-    audioRef.current.play().then(() => setIsPlaying(true)).catch(err => {
-      console.error('Audio play error:', err);
-      setIsPlaying(false);
-    });
+
+    try {
+      const fullPath = import.meta.env.BASE_URL + AUDIO_BASE + encodePath(track.path);
+      audioRef.current.src = fullPath;
+      
+      audioRef.current.load(); 
+
+      audioRef.current.play()
+        .then(() => setIsPlaying(true))
+        .catch(err => {
+          console.error('Audio play error:', err);
+          setIsPlaying(false);
+        });
+    } catch (error) {
+      console.error('Path resolution error:', error);
+    }
   };
+
 
   const togglePlay = () => {
     if (!audioRef.current || !currentTrack) return;

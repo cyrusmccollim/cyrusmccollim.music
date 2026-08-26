@@ -1,13 +1,12 @@
 import { Play } from 'lucide-react';
 import { useAudio } from '../context/AudioContext';
-import { tracks } from '../data';
+import { allTracks } from '../data';
 
 export default function Hero() {
   const { playTrack } = useAudio();
 
   const handlePlayReel = () => {
-    const pool = tracks.original.filter(t => t.category === 'Orchestral');
-    const reelTrack = pool[Math.floor(Math.random() * pool.length)];
+    const reelTrack = allTracks[Math.floor(Math.random() * allTracks.length)];
     if (reelTrack) playTrack(reelTrack);
   };
 
@@ -32,7 +31,7 @@ export default function Hero() {
         </h1>
         
         <p className="font-display text-xl md:text-2xl font-light italic text-muted max-w-2xl mx-auto mb-12">
-          Writing music for orchestra, solo piano, and small ensembles.
+          Writing music for piano, ensembles, and orchestra.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-6">
