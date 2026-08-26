@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const audioDir = path.join(__dirname, '../../files/audio');
-const scriptFile = path.join(__dirname, '../../script.js');
+// Adjusted paths for the React Vite app structure
+const audioDir = path.join(__dirname, '../../public/files/audio');
+const scriptFile = path.join(__dirname, '../../src/data.ts');
 
 try {
     if (!fs.existsSync(audioDir) || !fs.existsSync(scriptFile)) {
@@ -38,8 +39,8 @@ try {
 
     let scriptContent = fs.readFileSync(scriptFile, 'utf8');
 
-    // Find where audioData is assigned in script.js
-    const markerStart = 'const audioData = ';
+    // Find where rawAudioData is assigned in src/data.ts
+    const markerStart = 'const rawAudioData = ';
     const startIndex = scriptContent.indexOf(markerStart);
     if (startIndex === -1) process.exit(1);
 
@@ -63,7 +64,7 @@ try {
 
     if (endIndex === -1) process.exit(1);
 
-    const newAudioData = `const audioData = ${JSON.stringify(catalog, null, 6)};`;
+    const newAudioData = `const rawAudioData = ${JSON.stringify(catalog, null, 4)};`;
     const finalScript = scriptContent.substring(0, startIndex) + newAudioData + scriptContent.substring(endIndex + 1);
 
     fs.writeFileSync(scriptFile, finalScript, 'utf8');
