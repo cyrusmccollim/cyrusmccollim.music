@@ -3,18 +3,47 @@ import { Play, Pause, Download, Clock } from 'lucide-react';
 import { useAudio } from '../context/AudioContext';
 import { tracks, TrackInfo } from '../data';
 
+function seededRandom(seed: number) {
+  let s = seed;
+  return () => {
+    s = (s + 0x6D2B79F5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function shuffleWithSeed<T>(arr: T[], seed: number): T[] {
+  const result = [...arr];
+  const rand = seededRandom(seed);
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState<'original' | 'commissioned'>('original');
-  const { currentTrack, isPlaying, playTrack } = useAudio();
+  const { currentTrack, isPlaying, playQueue } = useAudio();
 
   const currentTracks = tracks[activeTab];
+  const hourSeed = new Date().getHours();
 
-  // Group by category
   const groupedTracks = currentTracks.reduce((acc, track) => {
     if (!acc[track.category]) acc[track.category] = [];
     acc[track.category].push(track);
     return acc;
   }, {} as Record<string, TrackInfo[]>);
+
+  const shuffledGrouped = Object.fromEntries(
+    Object.entries(groupedTracks).map(([cat, catTracks], i) => [
+      cat,
+      shuffleWithSeed(catTracks, hourSeed * 31 + i),
+    ])
+  );
+
+  const flatTracks = Object.values(shuffledGrouped).flat();
 
   const formatTime = (timeInSeconds?: number) => {
     if (!timeInSeconds) return "--:--";
@@ -24,7 +53,7 @@ export default function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="py-24 bg-surface border-y border-white/5 relative">
+    <section id="portfolio" className="py-12 md:py-24 bg-surface border-b border-white/5 relative">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
@@ -58,7 +87,7 @@ export default function Portfolio() {
         </div>
 
         <div className="space-y-16">
-          {Object.entries(groupedTracks).map(([category, categoryTracks]) => (
+          {Object.entries(shuffledGrouped).map(([category, categoryTracks]) => (
             <div key={category}>
               <div className="flex items-center gap-4 mb-6 border-b border-white/5 pb-4">
                 <h3 className="font-sans text-sm font-bold tracking-[0.2em] uppercase text-gold">
@@ -70,24 +99,25 @@ export default function Portfolio() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {categoryTracks.map((track, i) => {
+                {categoryTracks.map((track) => {
                   const isActive = currentTrack?.path === track.path;
-                  
+                  const globalIndex = flatTracks.findIndex(t => t.path === track.path);
+
                   return (
-                    <div 
+                    <div
                       key={track.path}
                       className={`group flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${
-                        isActive 
-                          ? 'bg-surface-elevated border-gold/20' 
+                        isActive
+                          ? 'bg-surface-elevated border-gold/20'
                           : 'bg-transparent border-transparent hover:bg-surface-hover hover:border-white/5'
                       }`}
                     >
                       <div className="flex items-center gap-4 min-w-0">
-                        <button 
-                          onClick={() => playTrack(track)}
+                        <button
+                          onClick={() => playQueue(flatTracks, globalIndex)}
                           className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                            isActive 
-                              ? 'bg-gold text-obsidian' 
+                            isActive
+                              ? 'bg-gold text-obsidian'
                               : 'bg-white/5 text-muted group-hover:bg-gold/20 group-hover:text-gold'
                           }`}
                         >
@@ -97,7 +127,7 @@ export default function Portfolio() {
                             <Play size={16} fill="currentColor" className="ml-1" />
                           )}
                         </button>
-                        
+
                         <div className="min-w-0 flex flex-col">
                           <span className={`font-display text-lg truncate ${isActive ? 'text-oyster' : 'text-muted group-hover:text-oyster transition-colors'}`}>
                             {track.title}

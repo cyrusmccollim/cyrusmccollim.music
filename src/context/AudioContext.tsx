@@ -8,9 +8,19 @@ interface AudioContextType {
   duration: number;
   volume: number;
   playTrack: (track: TrackInfo) => void;
+  playQueue: (tracks: TrackInfo[], index: number) => void;
   togglePlay: () => void;
   setVolume: (val: number) => void;
   seek: (pct: number) => void;
+}
+
+function encodePath(path: string): string {
+  return path.split('/').map(segment =>
+    encodeURIComponent(segment)
+      .replace(/\(/g, '%28')
+      .replace(/\)/g, '%29')
+      .replace(/'/g, '%27')
+  ).join('/');
 }
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
@@ -21,8 +31,10 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolumeState] = useState(0.8);
-  
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const queueRef = useRef<TrackInfo[]>([]);
+  const currentIndexRef = useRef<number>(-1);
 
   useEffect(() => {
     const audio = new Audio();
@@ -37,8 +49,17 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     };
 
     const handleEnded = () => {
-      setIsPlaying(false);
-      setProgress(0);
+      const nextIndex = currentIndexRef.current + 1;
+      if (nextIndex < queueRef.current.length) {
+        const nextTrack = queueRef.current[nextIndex];
+        currentIndexRef.current = nextIndex;
+        setCurrentTrack(nextTrack);
+        audio.src = import.meta.env.BASE_URL + AUDIO_BASE + encodePath(nextTrack.path);
+        audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      } else {
+        setIsPlaying(false);
+        setProgress(0);
+      }
     };
 
     audio.addEventListener('timeupdate', updateProgress);
@@ -54,37 +75,57 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const playTrack = (track: TrackInfo) => {
-    if (!audioRef.current) return;
-    
+  const playQueue = (tracks: TrackInfo[], index: number) => {
+    if (!audioRef.current || index < 0 || index >= tracks.length) return;
+    const track = tracks[index];
+
     if (currentTrack?.path === track.path) {
-      // Toggle if it's the same track
       togglePlay();
       return;
     }
 
-    // New track
+    queueRef.current = tracks;
+    currentIndexRef.current = index;
     setCurrentTrack(track);
-    audioRef.current.src = encodeURI(import.meta.env.BASE_URL + AUDIO_BASE + track.path);
-    audioRef.current.play().then(() => {
-      setIsPlaying(true);
-    }).catch(err => {
-      console.error("Audio play error:", err);
+    audioRef.current.src = import.meta.env.BASE_URL + AUDIO_BASE + encodePath(track.path);
+    audioRef.current.play().then(() => setIsPlaying(true)).catch(err => {
+      console.error('Audio play error:', err);
+      setIsPlaying(false);
+    });
+  };
+
+  const playTrack = (track: TrackInfo) => {
+    if (!audioRef.current) return;
+
+    if (currentTrack?.path === track.path) {
+      togglePlay();
+      return;
+    }
+
+    const idx = queueRef.current.findIndex(t => t.path === track.path);
+    if (idx !== -1) {
+      currentIndexRef.current = idx;
+    } else {
+      queueRef.current = [track];
+      currentIndexRef.current = 0;
+    }
+
+    setCurrentTrack(track);
+    audioRef.current.src = import.meta.env.BASE_URL + AUDIO_BASE + encodePath(track.path);
+    audioRef.current.play().then(() => setIsPlaying(true)).catch(err => {
+      console.error('Audio play error:', err);
       setIsPlaying(false);
     });
   };
 
   const togglePlay = () => {
     if (!audioRef.current || !currentTrack) return;
-    
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch(err => {
-        console.error("Audio play error:", err);
+      audioRef.current.play().then(() => setIsPlaying(true)).catch(err => {
+        console.error('Audio play error:', err);
         setIsPlaying(false);
       });
     }
@@ -92,9 +133,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
 
   const setVolume = (val: number) => {
     setVolumeState(val);
-    if (audioRef.current) {
-      audioRef.current.volume = val;
-    }
+    if (audioRef.current) audioRef.current.volume = val;
   };
 
   const seek = (pct: number) => {
@@ -106,15 +145,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
 
   return (
     <AudioContext.Provider value={{
-      currentTrack,
-      isPlaying,
-      progress,
-      duration,
-      volume,
-      playTrack,
-      togglePlay,
-      setVolume,
-      seek
+      currentTrack, isPlaying, progress, duration, volume,
+      playTrack, playQueue, togglePlay, setVolume, seek,
     }}>
       {children}
     </AudioContext.Provider>

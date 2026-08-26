@@ -3,7 +3,7 @@ name: Update Audio Catalog
 on:
   push:
     paths:
-      - 'public/files/audio/**'
+      - 'files/audio/**'
 
 jobs:
   update-catalog:

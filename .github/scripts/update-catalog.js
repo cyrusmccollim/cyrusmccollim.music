@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Adjusted paths for the React Vite app structure
-const audioDir = path.join(__dirname, '../../public/files/audio');
+const audioDir = path.join(__dirname, '../../files/audio');
 const scriptFile = path.join(__dirname, '../../src/data.ts');
 
 try {

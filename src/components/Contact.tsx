@@ -12,7 +12,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-32 bg-obsidian border-t border-white/5 relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-32 bg-obsidian border-t border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_100%,rgba(201,168,76,0.03),transparent_70%)]" />
       
       <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-16">
@@ -35,7 +35,7 @@ export default function Contact() {
               <span className="block font-sans text-xs font-semibold tracking-widest uppercase text-muted mb-2">
                 {copied ? "Copied to clipboard" : "Copy email"}
               </span>
-              <span className="block font-display font-light text-xl sm:text-2xl md:text-3xl text-oyster group-hover:text-gold transition-colors duration-300 break-all sm:break-normal">
+              <span className="block font-display font-light text-lg sm:text-2xl md:text-2xl text-oyster group-hover:text-gold transition-colors duration-300 whitespace-nowrap">
                 {email}
               </span>
             </div>

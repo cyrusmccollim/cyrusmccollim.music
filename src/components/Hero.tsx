@@ -6,18 +6,21 @@ export default function Hero() {
   const { playTrack } = useAudio();
 
   const handlePlayReel = () => {
-    // Play the first orchestral track as the reel
-    const reelTrack = tracks.original.find(t => t.category === 'Orchestral') || tracks.original[0];
-    if (reelTrack) {
-      playTrack(reelTrack);
-    }
+    const pool = tracks.original.filter(t => t.category === 'Orchestral');
+    const reelTrack = pool[Math.floor(Math.random() * pool.length)];
+    if (reelTrack) playTrack(reelTrack);
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
       {/* Subtle Background Gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(255,255,255,0.03)_0%,transparent_80%)]" />
       <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-obsidian to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 leading-none z-10">
+        <svg viewBox="0 0 1440 72" preserveAspectRatio="none" className="w-full h-12 md:h-16 lg:h-[72px] block">
+          <path d="M0,36 C240,72 480,0 720,36 C960,72 1200,0 1440,36 L1440,72 L0,72 Z" fill="#141312"/>
+        </svg>
+      </div>
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
         <span className="font-sans text-xs font-bold tracking-[0.4em] uppercase text-gold mb-6 block">

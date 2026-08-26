@@ -20,7 +20,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-24 bg-obsidian-warm relative border-t border-white/5">
+    <section id="services" className="py-12 md:py-24 bg-obsidian-warm relative border-t border-white/5">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         
         {/* Services Section */}
@@ -29,9 +29,7 @@ export default function Services() {
             Freelance
           </h2>
           <p className="font-sans text-md text-dim max-w-xl mx-auto">
-            I also take on freelance projects when my schedule allows!
-            <br/>
-            Please reach out to me via email for project proposals.
+            Please reach out to me via email for project proposals.<br/>
           </p>
         </div>
 
@@ -48,7 +46,6 @@ export default function Services() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

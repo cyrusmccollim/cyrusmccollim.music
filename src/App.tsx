@@ -39,7 +39,7 @@ export default function App() {
                 &copy; {new Date().getFullYear()} Cyrus McCollim. All rights reserved.
               </p>
               <p className="font-sans text-xs text-dim/60 max-w-sm md:max-w-none leading-relaxed">
-                Music on this page is protected under copyright law and may not be<br/> used, distributed, or modified without explicit written permission.
+                Music on this page is protected under copyright law and may not be used, distributed, or modified without explicit written permission.
               </p>
             </div>
           </div>

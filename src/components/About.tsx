@@ -1,10 +1,10 @@
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-surface border-b border-white/5">
+    <section id="about" className="py-12 md:py-24 bg-surface border-b border-white/5">
       <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div className="relative aspect-[3/4] rounded-2xl overflow-hidden group">
           <img 
-            src="files/profile.png" 
+            src="/files/profile.png" 
             alt="Cyrus McCollim" 
             className="w-full h-full object-cover filter group-hover:scale-105 transition-all duration-700"
           />

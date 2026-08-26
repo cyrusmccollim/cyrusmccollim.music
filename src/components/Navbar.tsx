@@ -60,7 +60,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-40 bg-obsidian/95 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 ${
+      <div className={`fixed inset-0 z-40 bg-obsidian flex flex-col items-center justify-center transition-all duration-500 ${
         mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}>
         <div className="flex flex-col items-center gap-8">
