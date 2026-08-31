@@ -21,7 +21,7 @@ export default function Contact() {
             Contact
           </h2>
           <p className="font-sans text-muted text-base md:text-lg leading-relaxed mb-10 max-w-md">
-            Reach out to discuss your project, licensing, or collaborations.
+            Reach out to me via email for projects, licensing, collaborations, or general inquiries!
           </p>
           
           <button 
@@ -44,7 +44,7 @@ export default function Contact() {
 
         <div className="flex flex-col gap-6 w-full md:w-auto border-t border-white/10 md:border-none pt-10 md:pt-0">
           <span className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-gold mb-2">
-            Published Music
+            Streaming 
           </span>
           <a href="https://open.spotify.com/artist/0jJ9N3jCnkzpVOtvjIiLZ4" target="_blank" rel="noopener noreferrer" className="text-oyster hover:text-gold transition-colors font-display text-2xl flex items-center justify-between gap-8 group border-b border-white/5 pb-4">
             Spotify

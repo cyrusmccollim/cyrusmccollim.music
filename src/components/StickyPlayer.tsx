@@ -20,7 +20,6 @@ export default function StickyPlayer() {
     <div className="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-24px)] md:w-[calc(100%-32px)] max-w-4xl z-50">
       <div className="bg-obsidian-warm/95 backdrop-blur-xl border border-white/10 rounded-2xl py-4 px-6 md:py-4 md:px-8 flex flex-col md:flex-row items-center gap-4 md:gap-6 shadow-2xl">
         
-        {/* Top/Left Section: Play, Info, and Mobile Volume */}
         <div className="flex items-center justify-between w-full md:w-auto md:min-w-[240px] gap-4">
           <div className="flex items-center gap-4 overflow-hidden flex-1">
             <button 
@@ -35,7 +34,6 @@ export default function StickyPlayer() {
             </div>
           </div>
           
-          {/* Volume (Mobile only) */}
           <div className="flex md:hidden items-center gap-2 justify-end w-[90px] flex-shrink-0">
             <button onClick={() => setVolume(volume === 0 ? 0.8 : 0)} className="text-muted hover:text-oyster transition-colors">
               {volume === 0 ? <VolumeX size={16} /> : <Volume2 size={16} />}
@@ -52,7 +50,6 @@ export default function StickyPlayer() {
           </div>
         </div>
 
-        {/* Center Section: Progress Bar */}
         <div className="flex items-center gap-3 md:gap-4 flex-grow w-full">
           <span className="font-sans font-medium tabular-nums text-xs text-muted w-10 text-left md:text-right flex-shrink-0">
             {formatTime(progress)}
@@ -80,7 +77,6 @@ export default function StickyPlayer() {
           </span>
         </div>
 
-        {/* Volume (Desktop only) */}
         <div className="hidden md:flex items-center justify-end gap-3 w-[140px] flex-shrink-0">
           <button onClick={() => setVolume(volume === 0 ? 0.8 : 0)} className="text-muted hover:text-oyster transition-colors">
             {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}

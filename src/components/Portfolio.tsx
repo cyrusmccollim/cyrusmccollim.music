@@ -58,7 +58,7 @@ export default function Portfolio() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
             <h2 className="font-display text-4xl md:text-5xl font-light text-oyster">
-              Portfolio
+              Music
             </h2>
           </div>
 

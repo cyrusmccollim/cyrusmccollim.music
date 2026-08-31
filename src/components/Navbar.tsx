@@ -14,8 +14,8 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: 'Works', href: '#portfolio' },
-    { label: 'Services', href: '#services' },
+    { label: 'Music', href: '#portfolio' },
+    // { label: 'Services', href: '#services' },
     { label: 'About', href: '#about' },
   ];
 
@@ -29,7 +29,6 @@ export default function Navbar() {
             CM
           </a>
 
-          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <a 
@@ -48,7 +47,6 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Toggle */}
           <button 
             className="md:hidden text-oyster"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -59,7 +57,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <div className={`fixed inset-0 z-40 bg-obsidian flex flex-col items-center justify-center transition-all duration-500 ${
         mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}>

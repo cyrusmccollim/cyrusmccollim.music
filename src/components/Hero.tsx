@@ -11,8 +11,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
-      {/* Subtle Background Gradient */}
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-20">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(255,255,255,0.03)_0%,transparent_80%)]" />
       <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-obsidian to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 leading-none z-10">

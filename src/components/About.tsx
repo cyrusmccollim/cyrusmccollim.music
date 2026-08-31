@@ -6,7 +6,7 @@ export default function About() {
           <img 
             src="/files/profile.png" 
             alt="Cyrus McCollim" 
-            className="w-full h-full object-cover filter group-hover:scale-105 transition-all duration-700"
+            className="w-full h-full object-cover filter saturate-80 group-hover:scale-105 transition-all duration-700"
           />
           <div className="absolute inset-0 border border-white/10 rounded-2xl pointer-events-none" />
         </div>
@@ -16,13 +16,13 @@ export default function About() {
             About
           </span>
           <p className="font-sans text-muted leading-relaxed mb-6">
-            My journey started playing the music I heard in games I played and films I watched on the piano. That pulled me into taking learning piano seriously, which grew into an interest for the theoretical side of music, and eventually the desire to write that same kind of music myself.
+            My journey started by playing the music I heard in games and films on the piano. Diving into those works made me want to learn the instrument properly, which naturally evolved into a passion for music theory and composition.
           </p>
           <p className="font-sans text-muted leading-relaxed mb-6">
-            Piano and orchestra are where I feel most at home, but I like experimenting with different ensembles and instruments often. My process usually starts at the piano, playing around with ideas until something clicks, then gradually building the arrangement out from there.
+            While piano and orchestra are where I feel most at home, I enjoy experimenting with different ensembles and instruments. My process usually starts at the keys, playing around with ideas until something clicks, then gradually building the arrangement out from there.
           </p>
           <p className="font-sans text-muted leading-relaxed">
-            On the professional side, I've taken on projects ranging from piano compositions and arrangements, to full orchestral arrangements and score transcription.
+            On the professional side, my experience spans a wide variety of projects, including solo piano compositions, custom arrangements, full orchestral scoring, and score transcription.
           </p>
         </div>
       </div>
