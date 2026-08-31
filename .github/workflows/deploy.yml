@@ -28,6 +28,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Update audio catalog
+        run: node .github/scripts/update-catalog.js
+
       - name: Install dependencies
         run: npm install
 
